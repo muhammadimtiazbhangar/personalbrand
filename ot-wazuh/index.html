@@ -90,7 +90,7 @@
       <div class="c"><span class="n">UC1 · Critical</span><h3>Unauthorized Modbus write</h3><p>Zeek logs + CDB allowlist: a write from any host that isn't an approved engineering workstation raises a level-12 alert.</p></div>
       <div class="c"><span class="n">UC2 · High</span><h3>PLC project tampering</h3><p>FIM with whodata on engineering files: see who changed the logic, when, and with which process.</p></div>
       <div class="c"><span class="n">UC3 · High</span><h3>USB storage on HMI/EWS</h3><p>Registry FIM builds a removable-media history for every HMI and engineering workstation.</p></div>
-      <div class="c"><span class="n">UC4 · High</span><h3>Off-hours remote access</h3><p>Time-based rules on jump-host RDP sessions catch vendor and shared-account misuse.</p></div>
+      <div class="c"><span class="n">UC4 · High</span><h3>Off-hours remote access</h3><p>Time-based rules on remote-access RDP sessions catch vendor and shared-account misuse.</p></div>
       <div class="c"><span class="n">UC5 · Medium</span><h3>Hardening drift</h3><p>A custom SCA policy scores every HMI against a baseline tagged with IEC 62443 SRs.</p></div>
       <div class="c"><span class="n">UC6 · Medium</span><h3>Vulnerable OT software</h3><p>Syscollector inventory + vulnerability detection, without touching the PLCs.</p></div>
     </div>
@@ -100,13 +100,18 @@
 <section>
   <div class="wrap">
     <h2 class="t">The reference architecture</h2>
-    <p class="s">Passive at Levels 0–1, agents only where the OEM approves, and the Wazuh server inside the OT zone.</p>
-<div class="arch"><b>L4–5</b>  Enterprise SOC / SIEM            ← alerts only, northbound via DMZ (one-way)
-<b>L3.5</b>  OT DMZ: jump host [agent] · OT firewalls [syslog]
-<b>L3  </b>  Wazuh server (manager · indexer · dashboard) · historian [agent]
-<b>L2  </b>  HMI [agent] · EWS [agent] · Zeek/Suricata sensor ← SPAN/TAP (read-only)
-<b>L1  </b>  PLC · RTU · SIS: no agents, monitored passively
-<b>L0  </b>  Sensors · actuators · drives</div>
+    <p class="s">Purdue levels give the functional context; IEC 62443 zones and conduits are the security boundaries. No agents on controllers, the Wazuh server in its own OT security zone, and alerts leave OT only through the DMZ.</p>
+<div class="arch"><b>L4–5</b>         Enterprise SOC / SIEM                         ← C3 · approved events only, via DMZ relay
+<b>L3.5</b>  Z-DMZ  event export relay (allowlisted, audited)
+             remote-access gateway (MFA, recorded)         → C6 · brokered sessions to Z-SUP only
+<b>L3  </b>  Z-SEC  Wazuh server (manager · indexer · dashboard)
+      Z-OPS  historian / OT apps [agent]                   → C1 · agent telemetry
+      Z-NET  OT firewalls & switches [syslog]              → C4 · syslog
+<b>L2  </b>  Z-SUP  HMI / EWS [agent, OEM + perf. tested]         → C1 · agent telemetry
+      Z-MON  passive sensor (Zeek / Suricata)              → C5 · sensor telemetry
+<b>L0–1</b>  Z-CTRL PLC · RTU · IED: no agents                    mirrored via control-switch SPAN / TAP
+      Z-SIS  safety system: separate zone                  not mirrored</div>
+    <p class="s note">Zones are proposed and subject to a site risk assessment (IEC 62443-3-2). Conduits are firewall-enforced, controlled paths. C1 uses 1514/TCP on Wazuh 4.x.</p>
   </div>
 </section>
 
