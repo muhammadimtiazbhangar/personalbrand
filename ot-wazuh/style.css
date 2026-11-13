@@ -1,0 +1,97 @@
+:root{
+  --bg:#050b17; --bg2:#0a1428; --card:#0f1b33; --line:#1d2c4a;
+  --text:#e8edf6; --muted:#9fb0c9; --gold:#c9a54c; --gold2:#e2c477; --blue:#4285f4;
+  --ok:#2fbf71; --radius:14px;
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--gold2);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* nav */
+header.top{border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{font-weight:700;letter-spacing:.02em;color:var(--text)}
+.brand span{color:var(--gold)}
+header.top nav a{color:var(--muted);font-size:15px;margin-left:22px}
+
+/* hero */
+.hero{padding:72px 0 56px;background:radial-gradient(900px 420px at 85% -10%,rgba(66,133,244,.18),transparent 60%),radial-gradient(700px 380px at 0% 0%,rgba(201,165,76,.10),transparent 60%)}
+.hero .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:start}
+.kicker{display:inline-block;color:var(--gold);font-weight:700;font-size:13px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:18px}
+h1{font-size:46px;line-height:1.12;margin:0 0 18px;letter-spacing:-.01em}
+h1 em{font-style:normal;color:var(--gold2)}
+.lead{font-size:19px;color:var(--muted);max-width:560px;margin:0 0 26px}
+.bullets{list-style:none;padding:0;margin:0 0 28px}
+.bullets li{position:relative;padding-left:30px;margin:10px 0}
+.bullets li:before{content:"";position:absolute;left:0;top:7px;width:16px;height:16px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(201,165,76,.15)}
+.meta{color:var(--muted);font-size:14px}
+
+/* form card */
+.card{background:linear-gradient(180deg,var(--card),var(--bg2));border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.card h2{margin:0 0 6px;font-size:22px}
+.card p.sub{margin:0 0 18px;color:var(--muted);font-size:15px}
+label{display:block;font-size:14px;font-weight:600;margin:14px 0 6px}
+input[type=text],input[type=email],select{width:100%;padding:12px 14px;border-radius:10px;border:1px solid #2a3c60;background:#081124;color:var(--text);font-size:16px;font-family:inherit}
+input:focus,select:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:transparent}
+.check{display:flex;gap:10px;align-items:flex-start;margin-top:14px;font-size:14px;color:var(--muted);font-weight:400}
+.check input{margin-top:4px;width:18px;height:18px;accent-color:var(--gold);flex:none}
+.btn{display:inline-block;width:100%;margin-top:20px;padding:14px 18px;border:0;border-radius:10px;background:var(--gold);color:#111;font-weight:800;font-size:16px;cursor:pointer;font-family:inherit}
+.btn:hover{background:var(--gold2)}
+.fine{font-size:12.5px;color:var(--muted);margin-top:12px}
+.hp{position:absolute;left:-5000px}
+
+/* sections */
+section{padding:64px 0;border-top:1px solid var(--line)}
+section h2.t{font-size:32px;margin:0 0 10px}
+section p.s{color:var(--muted);margin:0 0 32px;max-width:720px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.cards.four{grid-template-columns:repeat(4,1fr)}
+.c{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+.c .n{display:inline-block;font-family:var(--mono);font-size:13px;color:var(--gold);border:1px solid rgba(201,165,76,.4);border-radius:999px;padding:2px 10px;margin-bottom:12px}
+.c h3{margin:0 0 6px;font-size:18px}
+.c p{margin:0;color:var(--muted);font-size:15px}
+.arch{font-family:var(--mono);font-size:14px;background:#081124;border:1px solid var(--line);border-radius:var(--radius);padding:22px;overflow:auto;color:#cfd8e8;line-height:1.75;white-space:pre}
+.arch b{color:var(--gold2);font-weight:600}
+.course{display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:center;background:linear-gradient(135deg,#13213f,#0b1427);border:1px solid #27406f;border-radius:var(--radius);padding:36px}
+.course h2{margin:0 0 10px;font-size:28px}
+.course p{color:var(--muted);margin:0 0 12px}
+.pill{display:inline-block;background:rgba(66,133,244,.15);color:#9ec1ff;border:1px solid rgba(66,133,244,.4);border-radius:999px;padding:4px 12px;font-size:13px;font-weight:700;margin-bottom:12px}
+.about{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+.mono-badge{width:96px;height:96px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#8a6d22);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:32px;color:#111}
+.creds{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.creds span{font-size:13px;border:1px solid var(--line);border-radius:999px;padding:3px 10px;color:var(--muted)}
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin:10px 0}
+.faq summary{cursor:pointer;font-weight:600}
+.faq p{color:var(--muted);margin:10px 0 0}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* prose pages */
+.prose{max-width:760px;padding:56px 24px 72px;margin:0 auto}
+.prose h1{font-size:36px}
+.prose h2{font-size:22px;margin-top:34px}
+.prose p,.prose li{color:#c9d3e3}
+.ok{display:inline-flex;width:64px;height:64px;border-radius:50%;background:rgba(47,191,113,.15);border:1px solid rgba(47,191,113,.5);align-items:center;justify-content:center;font-size:30px;color:var(--ok);margin-bottom:18px}
+
+@media (max-width:900px){
+  .hero .grid,.course,.about{grid-template-columns:1fr}
+  .cards,.cards.four{grid-template-columns:1fr 1fr}
+  h1{font-size:36px}
+}
+@media (max-width:600px){
+  body{font-size:16px}
+  .cards,.cards.four{grid-template-columns:1fr}
+  h1{font-size:31px}
+  .hero{padding:44px 0 36px}
+  header.top nav a{display:none}
+  header.top nav a.keep{display:inline}
+  section{padding:48px 0}
+  .card,.course{padding:22px}
+}
+.about h2.t{font-size:26px}.about p.s{margin-bottom:6px}

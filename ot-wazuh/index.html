@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Free OT/ICS Lab Kit for Wazuh | Muhammad Imtiaz</title>
+<meta name="description" content="Free OT/ICS security monitoring lab kit for Wazuh: detection rules, Zeek Modbus integration, IEC 62443-3-3 mapping and a step-by-step laptop lab guide.">
+<meta name="theme-color" content="#050b17">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self' https://static.cloudflareinsights.com; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://muhammadimtiaz.com/ot-wazuh/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/ot-wazuh/style.css">
+<link rel="stylesheet" href="/ot-wazuh/btn.css">
+<meta property="og:title" content="Free OT/ICS Lab Kit for Wazuh">
+<meta property="og:description" content="Detection rules, Zeek Modbus integration, IEC 62443-3-3 mapping and a laptop lab guide. Free for the Wazuh community.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://muhammadimtiaz.com/ot-wazuh/">
+<meta property="og:image" content="https://muhammadimtiaz.com/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/">Muhammad <span>Imtiaz</span></a>
+    <nav>
+      <a href="#inside">What's inside</a>
+      <a href="#course">Course</a>
+      <a class="keep" href="#get">Get the kit</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="hero">
+  <div class="wrap grid">
+    <div>
+      <span class="kicker">Free lab kit · OT/ICS × Wazuh</span>
+      <h1>See your plant floor the way an attacker does, <em>with open-source Wazuh.</em></h1>
+      <p class="lead">The companion kit to my Wazuh Ambassadors webinar: build an OT monitoring lab on one laptop, detect unauthorized PLC writes, USB drops and PLC logic changes, and turn IEC 62443 into evidence.</p>
+      <ul class="bullets">
+        <li><strong>Ready-to-load Wazuh rules</strong> for six OT use cases, plus a correlation rule</li>
+        <li><strong>Zeek Modbus → Wazuh integration</strong> with an engineering-host allowlist</li>
+        <li><strong>Step-by-step lab guide</strong> (web + printable PDF): soft PLC, HMI, sensor, attacker</li>
+        <li><strong>IEC 62443-3-3 ↔ Wazuh mapping sheet</strong> for auditors</li>
+      </ul>
+      <p class="meta">100% free · MIT-licensed · built for the Wazuh community</p>
+    </div>
+
+    <div class="card" id="get">
+      <h2>Get the free kit</h2>
+      <p class="sub">Free and open: no signup needed.</p>
+      <a class="btn" href="/ot-wazuh/guide/">Open the lab guide</a>
+      <a class="btn alt" href="https://github.com/muhammadimtiazbhangar/wazuh-ot-lab">Rules &amp; configs on GitHub</a>
+      <a class="btn alt" href="/ot-wazuh/kit/IEC62443-Wazuh-Mapping.csv" download>IEC 62443 mapping sheet (CSV)</a>
+      <p class="fine">Want early access to the hands-on course? <a href="mailto:info@muhammadimtiaz.com?subject=Early%20access%3A%20OT%20Security%20Monitoring%20with%20Wazuh">Email me</a> and you'll be first on the list.</p>
+    </div>
+  </div>
+</div>
+
+<section id="inside">
+  <div class="wrap">
+    <h2 class="t">Six OT detections, zero license cost</h2>
+    <p class="s">Every rule maps to MITRE ATT&amp;CK for ICS or IEC 62443-3-3, and you can test it in the lab before it goes anywhere near production.</p>
+    <div class="cards">
+      <div class="c"><span class="n">UC1 · Critical</span><h3>Unauthorized Modbus write</h3><p>Zeek logs + CDB allowlist: a write from any host that isn't an approved engineering workstation raises a level-12 alert.</p></div>
+      <div class="c"><span class="n">UC2 · High</span><h3>PLC project tampering</h3><p>FIM with whodata on engineering files: see who changed the logic, when, and with which process.</p></div>
+      <div class="c"><span class="n">UC3 · High</span><h3>USB storage on HMI/EWS</h3><p>Registry FIM builds a removable-media history for every HMI and engineering workstation.</p></div>
+      <div class="c"><span class="n">UC4 · High</span><h3>Off-hours remote access</h3><p>Time-based rules on jump-host RDP sessions catch vendor and shared-account misuse.</p></div>
+      <div class="c"><span class="n">UC5 · Medium</span><h3>Hardening drift</h3><p>A custom SCA policy scores every HMI against a baseline tagged with IEC 62443 SRs.</p></div>
+      <div class="c"><span class="n">UC6 · Medium</span><h3>Vulnerable OT software</h3><p>Syscollector inventory + vulnerability detection, without touching the PLCs.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2 class="t">The reference architecture</h2>
+    <p class="s">Passive at Levels 0–1, agents only where the OEM approves, and the Wazuh server inside the OT zone.</p>
+<div class="arch"><b>L4–5</b>  Enterprise SOC / SIEM            ← alerts only, northbound via DMZ (one-way)
+<b>L3.5</b>  OT DMZ: jump host [agent] · OT firewalls [syslog]
+<b>L3  </b>  Wazuh server (manager · indexer · dashboard) · historian [agent]
+<b>L2  </b>  HMI [agent] · EWS [agent] · Zeek/Suricata sensor ← SPAN/TAP (read-only)
+<b>L1  </b>  PLC · RTU · SIS: no agents, monitored passively
+<b>L0  </b>  Sensors · actuators · drives</div>
+  </div>
+</section>
+
+<section id="course">
+  <div class="wrap">
+    <div class="course">
+      <div>
+        <span class="pill">Coming soon · early-access list open</span>
+        <h2>Go deeper: OT Security Monitoring with Wazuh</h2>
+        <p>A hands-on course for engineers and SOC teams: build the full lab, write and tune OT detections, map them to IEC 62443, and run SOC playbooks built for plants, not offices.</p>
+        <p>Waitlist members get first access and the founding-cohort price.</p>
+      </div>
+      <div><a class="btn" href="mailto:info@muhammadimtiaz.com?subject=Early%20access%3A%20OT%20Security%20Monitoring%20with%20Wazuh">Join the early-access list</a></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap about">
+    <div class="mono-badge" aria-hidden="true">MI</div>
+    <div>
+      <h2 class="t">About Muhammad Imtiaz</h2>
+      <p class="s">OT cybersecurity specialist with ~10 years across ICS/OT, network security and GRC: from plant-floor resident engineer at a gas processing facility to running OT SOC operations in the GCC oil &amp; gas sector. Wazuh Ambassador and speaker at ISA chapters across the region.</p>
+      <div class="creds"><span>GICSP</span><span>ISA/IEC 62443</span><span>CISM</span><span>ISO 27001:2022 LA</span><span>SANS ICS</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap faq">
+    <h2 class="t">FAQ</h2>
+    <details><summary>Is the kit really free?</summary><p>Yes. The rules and configs are MIT-licensed on GitHub, and the lab guide and mapping sheet are free to read, print and share.</p></details>
+    <details><summary>Can I use this on a production plant?</summary><p>Build and test it in a lab first. Before production, review it with operations and your OEM, and follow your management-of-change process. Never enable active response on Level 1–2 assets.</p></details>
+    <details><summary>Which Wazuh version?</summary><p>Written for Wazuh 4.14.x with Zeek JSON logs. Always confirm rules with <code>wazuh-logtest</code> on your version.</p></details>
+    <details><summary>Is this an official Wazuh product?</summary><p>No. It's a community resource by a Wazuh Ambassador and isn't affiliated with or endorsed by Wazuh Inc.</p></details>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Muhammad Imtiaz · <a href="mailto:info@muhammadimtiaz.com">info@muhammadimtiaz.com</a></span>
+    <span><a href="/privacy/">Privacy</a> · <a href="https://github.com/muhammadimtiazbhangar/wazuh-ot-lab">GitHub</a> · <a href="https://www.linkedin.com/in/muhammad-imtiaz-ot/">LinkedIn</a></span>
+  </div>
+</footer>
+</body>
+</html>

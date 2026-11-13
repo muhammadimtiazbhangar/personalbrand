@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /ot-wazuh/kit/
+Disallow: /ot-wazuh/thanks/
+
+Sitemap: https://muhammadimtiaz.com/sitemap.xml
