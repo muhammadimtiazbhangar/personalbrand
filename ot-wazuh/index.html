@@ -6,7 +6,7 @@
 <title>Free OT/ICS Lab Kit for Wazuh | Muhammad Imtiaz</title>
 <meta name="description" content="Free OT/ICS security monitoring lab kit for Wazuh: detection rules, Zeek Modbus integration, IEC 62443-3-3 mapping and a step-by-step laptop lab guide.">
 <meta name="theme-color" content="#050b17">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self' https://static.cloudflareinsights.com; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self' https://static.cloudflareinsights.com; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'self'; form-action 'self' https://*.sibforms.com">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="canonical" href="https://muhammadimtiaz.com/ot-wazuh/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -45,16 +45,39 @@
         <li><strong>Step-by-step lab guide</strong> (web + printable PDF): soft PLC, HMI, sensor, attacker</li>
         <li><strong>IEC 62443-3-3 ↔ Wazuh mapping sheet</strong> for auditors</li>
       </ul>
-      <p class="meta">100% free · MIT-licensed · built for the Wazuh community</p>
+      <p class="meta">100% free · no spam · unsubscribe in one click</p>
     </div>
 
     <div class="card" id="get">
       <h2>Get the free kit</h2>
-      <p class="sub">Free and open: no signup needed.</p>
-      <a class="btn" href="/ot-wazuh/guide/">Open the lab guide</a>
-      <a class="btn alt" href="https://github.com/muhammadimtiazbhangar/wazuh-ot-lab">Rules &amp; configs on GitHub</a>
-      <a class="btn alt" href="/ot-wazuh/kit/IEC62443-Wazuh-Mapping.csv" download>IEC 62443 mapping sheet (CSV)</a>
-      <p class="fine">Want early access to the hands-on course? <a href="mailto:security@muhammadimtiaz.com?subject=Early%20access%3A%20OT%20Security%20Monitoring%20with%20Wazuh">Email me</a> and you'll be first on the list.</p>
+      <p class="sub">We'll email you the lab guide, mapping sheet and GitHub link.</p>
+      <form id="kit-form" method="POST" action="https://04b73430.sibforms.com/serve/MUIFAF7OPI1A6ExYZhmXbCqdANV3i4OLCfRBIyf9rF_er8lOR2BSWmjxKbL9kTp9wUdA3SPCdHyi6DSwPGbbRMG2OGGU8mW6wq9mhIDlxCHE_ioXJWKnDZmI_Of_LPRckvT3-MDEE3DUeUNx6BcX1ShuunBNyZh0Rk0_RNnshjLotWhWJJlDEgTmH7Bj1CvlecXeUEzbElFKJdBwCA==">
+        <label for="FIRSTNAME">First name</label>
+        <input type="text" id="FIRSTNAME" name="FIRSTNAME" autocomplete="given-name" maxlength="60" required>
+
+        <label for="EMAIL">Work or personal email</label>
+        <input type="email" id="EMAIL" name="EMAIL" autocomplete="email" maxlength="120" required>
+
+        <label for="ROLE">Your role</label>
+        <select id="ROLE" name="ROLE" required>
+          <option value="" selected disabled>Choose one</option>
+          <option>OT / ICS security</option>
+          <option>SOC analyst / engineer</option>
+          <option>Control / automation engineer</option>
+          <option>IT security / network</option>
+          <option>GRC / audit</option>
+          <option>Manager / leadership</option>
+          <option>Student / career changer</option>
+          <option>Other</option>
+        </select>
+        <label class="check"><input type="checkbox" name="OPT_IN" value="1" required><span>I agree to receive the kit, related updates and news about the hands-on course. I can unsubscribe anytime (<a href="/privacy/">privacy notice</a>).</span></label>
+
+        <input class="hp" type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input type="hidden" name="locale" value="en">
+        <input type="hidden" name="html_type" value="simple">
+        <button class="btn" type="submit">Send me the kit</button>
+        <p class="fine">You'll get a confirmation email first (double opt-in). Check spam if it doesn't arrive within a few minutes. Just want the rules? <a href="https://github.com/muhammadimtiazbhangar/wazuh-ot-lab">They're on GitHub</a>.</p>
+      </form>
     </div>
   </div>
 </div>
@@ -96,7 +119,7 @@
         <p>A hands-on course for engineers and SOC teams: build the full lab, write and tune OT detections, map them to IEC 62443, and run SOC playbooks built for plants, not offices.</p>
         <p>Waitlist members get first access and the founding-cohort price.</p>
       </div>
-      <div><a class="btn" href="mailto:security@muhammadimtiaz.com?subject=Early%20access%3A%20OT%20Security%20Monitoring%20with%20Wazuh">Join the early-access list</a></div>
+      <div><a class="btn" href="#get">Join the early-access list</a></div>
     </div>
   </div>
 </section>
@@ -115,7 +138,7 @@
 <section>
   <div class="wrap faq">
     <h2 class="t">FAQ</h2>
-    <details><summary>Is the kit really free?</summary><p>Yes. The rules and configs are MIT-licensed on GitHub, and the lab guide and mapping sheet are free to read, print and share.</p></details>
+    <details><summary>Is the kit really free?</summary><p>Yes. The rules and configs are MIT-licensed on GitHub. Your email gets you the lab guide, the mapping sheet and updates.</p></details>
     <details><summary>Can I use this on a production plant?</summary><p>Build and test it in a lab first. Before production, review it with operations and your OEM, and follow your management-of-change process. Never enable active response on Level 1–2 assets.</p></details>
     <details><summary>Which Wazuh version?</summary><p>Written for Wazuh 4.14.x with Zeek JSON logs. Always confirm rules with <code>wazuh-logtest</code> on your version.</p></details>
     <details><summary>Is this an official Wazuh product?</summary><p>No. It's a community resource by a Wazuh Ambassador and isn't affiliated with or endorsed by Wazuh Inc.</p></details>
